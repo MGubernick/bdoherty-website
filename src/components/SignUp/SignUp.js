@@ -13,9 +13,18 @@ class SignUp extends Component {
 
     this.state = {
       email: '',
+      username: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      showSignUpModal: true
     }
+  }
+
+  handleCloseSignUpModal = (event) => {
+    const { history } = this.props
+
+    this.setState({ showSignUpModal: false })
+    history.push('/')
   }
 
   handleChange = event => this.setState({
@@ -37,7 +46,7 @@ class SignUp extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ email: '', password: '', passwordConfirmation: '' })
+        this.setState({ email: '', username: '', password: '', passwordConfirmation: '' })
         msgAlert({
           heading: 'Sign Up Failed with error: ' + error.message,
           message: messages.signUpFailure,
@@ -47,7 +56,7 @@ class SignUp extends Component {
   }
 
   render () {
-    const { email, password, passwordConfirmation } = this.state
+    const { email, username, password, passwordConfirmation } = this.state
 
     return (
       <div className="row">
@@ -62,6 +71,17 @@ class SignUp extends Component {
                 name="email"
                 value={email}
                 placeholder="Enter email"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="username"
+                value={username}
+                placeholder="Pick A Unique Username"
                 onChange={this.handleChange}
               />
             </Form.Group>
