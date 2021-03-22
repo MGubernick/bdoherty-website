@@ -10,6 +10,11 @@ import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 
+// import item components
+import AddItem from './components/AddItem/AddItem.js'
+import Browser from './components/Browser/Browser.js'
+import ShowOne from './components/ShowOne/ShowOne.js'
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -59,11 +64,20 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
+          <Route exact path='/' render={() => (
+            <Browser msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/items/:id' render={() => (
+            <ShowOne msgAlert={this.msgAlert} user={user} />
+          )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/add-one' render={() => (
+            <AddItem msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
