@@ -34,10 +34,10 @@ export const updateItem = (id, item, user) => {
   return axios({
     url: apiUrl + '/items/' + id,
     method: 'PATCH',
-    data: { item: item },
     headers: {
       'Authorization': `Bearer ${user.token}`
-    }
+    },
+    data: { item: item }
   })
 }
 

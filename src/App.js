@@ -14,6 +14,7 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 import AddItem from './components/AddItem/AddItem.js'
 import Browser from './components/Browser/Browser.js'
 import ShowOne from './components/ShowOne/ShowOne.js'
+import UpdateItem from './components/UpdateItem/UpdateItem.js'
 
 class App extends Component {
   constructor (props) {
@@ -78,6 +79,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/add-one' render={() => (
             <AddItem msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/update-item/:id' render={() => (
+            <UpdateItem msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>

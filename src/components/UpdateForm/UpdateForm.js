@@ -1,34 +1,34 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-const AddForm = ({ item, handleSubmit, handleChange }) => {
-  const [showAddModal, setShowAddModal] = useState(true)
+const UpdateForm = ({ item, handleSubmit, handleChange }) => {
+  const [showUpdateModal, setShowUpdateModal] = useState(true)
   const [backHome, setBackHome] = useState(false)
 
-  const handleCloseAddModal = (event) => {
-    setShowAddModal(false)
+  const handleCloseUpdateModal = (event) => {
+    setShowUpdateModal(false)
     setBackHome(true)
   }
 
   if (backHome) {
     return (
-      <Redirect to={'/'} />
+      <Redirect to={`/items/${item._id}`} />
     )
   }
 
   return (
     <Modal
-      show={showAddModal}
-      onHide={handleCloseAddModal}
+      show={showUpdateModal}
+      onHide={handleCloseUpdateModal}
       backdrop="static"
       keyboard={false}
     >
       <Modal.Header className='modal-bg' closeButton>
-        <Modal.Title>What$apos;s New!</Modal.Title>
+        <Modal.Title>Update!</Modal.Title>
       </Modal.Header>
       <Modal.Body className='modal-bg'>
         <Form onSubmit={handleSubmit}>
@@ -100,7 +100,7 @@ const AddForm = ({ item, handleSubmit, handleChange }) => {
             />
           </Form.Group>
 
-          <Button variant="secondary" onClick={handleCloseAddModal}>
+          <Button variant="secondary" onClick={handleCloseUpdateModal}>
               Close
           </Button>
           <Button
@@ -115,4 +115,4 @@ const AddForm = ({ item, handleSubmit, handleChange }) => {
   )
 }
 
-export default AddForm
+export default withRouter(UpdateForm)

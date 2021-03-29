@@ -35,10 +35,10 @@ class OneItem extends Component {
     const { user, match, history, msgAlert } = this.props
     deleteItem(match.params.id, user)
       .then(this.setState({ exists: false }))
-      .then(() => msgAlert({
-        message: 'Deleted the item!',
-        variant: 'success'
-      }))
+      // .then(() => msgAlert({
+      //   message: 'Deleted the item!',
+      //   variant: 'success'
+      // }))
       .then(() => history.push('/'))
       .catch(error => {
         msgAlert({
@@ -56,10 +56,10 @@ class OneItem extends Component {
         this.setState({ item: res.data.item })
         return res
       })
-      .then(res => msgAlert({
-        message: `Here is ${res.data.item.name}!`,
-        variant: 'success'
-      }))
+      // .then(res => msgAlert({
+      //   message: `Here is ${res.data.item.name}!`,
+      //   variant: 'success'
+      // }))
       .catch(error => msgAlert({
         message: `Uh Oh..that didn't work because..${error.message}`,
         variant: 'danger'
@@ -77,7 +77,7 @@ class OneItem extends Component {
 
     if (clickUpdateItem) {
       return (
-        <Redirect to={`/update-workout/${item._id}`} />
+        <Redirect to={`/update-item/${item._id}`} />
       )
     }
 

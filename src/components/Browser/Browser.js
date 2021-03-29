@@ -26,10 +26,10 @@ class IndexItems extends Component {
       .then(res => {
         this.setState({ items: res.data.item })
       })
-      .then(() => msgAlert({
-        message: 'Happy Shopping!',
-        variant: 'success'
-      }))
+      // .then(() => msgAlert({
+      //   message: 'Happy Shopping!',
+      //   variant: 'success'
+      // }))
       .catch(error => {
         msgAlert({
           message: `UhOh..Someting went wrong, couldn't load the page because ${error.message}`
