@@ -26,6 +26,14 @@ const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
     <Nav.Link href="#about-me">About Me</Nav.Link>
+    <NavDropdown title='Shop By Category' id="basic-nav-dropdown" className="dropdownitem">
+      <NavDropdown.Item className="dropdownitem" href="#search-mugs">Mugs</NavDropdown.Item>
+      <NavDropdown.Item className="dropdownitem" href="#search-bowls">Bowls</NavDropdown.Item>
+      <NavDropdown.Item className="dropdownitem" href="#search-plates">Plates</NavDropdown.Item>
+      <NavDropdown.Item className="dropdownitem" href="#search-trays">Trays</NavDropdown.Item>
+      <NavDropdown.Item className="dropdownitem" href="#search-sets">Full-Sets</NavDropdown.Item>
+      <NavDropdown.Item className="dropdownitem" href="#search-other">Everything Else</NavDropdown.Item>
+    </NavDropdown>
   </Fragment>
 )
 

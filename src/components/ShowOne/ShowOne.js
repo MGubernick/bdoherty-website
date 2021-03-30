@@ -71,6 +71,8 @@ class OneItem extends Component {
     const { user } = this.props
     let admin
 
+    // console.log('this is item', item)
+
     if (!item) {
       return 'Loading...'
     }

@@ -15,6 +15,12 @@ import AddItem from './components/AddItem/AddItem.js'
 import Browser from './components/Browser/Browser.js'
 import ShowOne from './components/ShowOne/ShowOne.js'
 import UpdateItem from './components/UpdateItem/UpdateItem.js'
+import MugIndex from './components/Category/MugIndex/MugIndex.js'
+import BowlIndex from './components/Category/BowlIndex/BowlIndex.js'
+import PlateIndex from './components/Category/PlateIndex/PlateIndex.js'
+import TrayIndex from './components/Category/TrayIndex/TrayIndex.js'
+import FullSetIndex from './components/Category/FullSetIndex/FullSetIndex.js'
+import ElseIndex from './components/Category/EverythingElseIndex/EverythingElseIndex.js'
 
 class App extends Component {
   constructor (props) {
@@ -70,6 +76,24 @@ class App extends Component {
           )} />
           <Route exact path='/items/:id' render={() => (
             <ShowOne msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/search-mugs' render={() => (
+            <MugIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/search-bowls' render={() => (
+            <BowlIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/search-plates' render={() => (
+            <PlateIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/search-trays' render={() => (
+            <TrayIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/search-sets' render={() => (
+            <FullSetIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/search-other' render={() => (
+            <ElseIndex msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
