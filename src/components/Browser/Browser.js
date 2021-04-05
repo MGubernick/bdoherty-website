@@ -42,6 +42,8 @@ class IndexItems extends Component {
 
     const { items } = this.state
 
+    console.log('this is items', items)
+
     if (!items) {
       itemsJsx = 'Loading...'
     }

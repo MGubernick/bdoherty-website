@@ -41,6 +41,15 @@ export const updateItem = (id, item, user) => {
   })
 }
 
+// Update item in cart
+export const updateCartItem = (id, item) => {
+  return axios({
+    url: apiUrl + '/items-incart/' + id,
+    method: 'PATCH',
+    data: { item: item }
+  })
+}
+
 // Delete An Item
 export const deleteItem = (id, user) => {
   return axios({
