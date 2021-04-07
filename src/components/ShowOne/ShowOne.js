@@ -27,11 +27,6 @@ class OneItem extends Component {
     updateCartItem(item._id, item)
       .then(this.setState({ inCart: true }))
 
-    // showItem(match.params.id, user)
-    //   .then(res => {
-    //     this.setState({ item: res.data.item })
-    //     return res
-    //   })
       .then(console.log(item))
   }
 
@@ -43,11 +38,6 @@ class OneItem extends Component {
     updateCartItem(item._id, item)
       .then(this.setState({ inCart: false }))
 
-    // showItem(match.params.id, user)
-    //   .then(res => {
-    //     this.setState({ item: res.data.item })
-    //     return res
-    //   })
       .then(console.log(item))
   }
 

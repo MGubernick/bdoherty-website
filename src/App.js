@@ -21,6 +21,7 @@ import PlateIndex from './components/Category/PlateIndex/PlateIndex.js'
 import TrayIndex from './components/Category/TrayIndex/TrayIndex.js'
 import FullSetIndex from './components/Category/FullSetIndex/FullSetIndex.js'
 import ElseIndex from './components/Category/EverythingElseIndex/EverythingElseIndex.js'
+import Cart from './components/Cart/Cart.js'
 
 class App extends Component {
   constructor (props) {
@@ -94,6 +95,9 @@ class App extends Component {
           )} />
           <Route exact path='/search-other' render={() => (
             <ElseIndex msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/cart' render={() => (
+            <Cart msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />

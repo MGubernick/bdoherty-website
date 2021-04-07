@@ -34,6 +34,7 @@ const alwaysOptions = (
       <NavDropdown.Item className="dropdownitem" href="#search-sets">Full-Sets</NavDropdown.Item>
       <NavDropdown.Item className="dropdownitem" href="#search-other">Everything Else</NavDropdown.Item>
     </NavDropdown>
+    <Nav.Link href="#cart"><i rel="shortcut icon" href="https://icongr.am/material/cart-outline.svg?size=128&color=currentColor"></i></Nav.Link>
   </Fragment>
 )
 
