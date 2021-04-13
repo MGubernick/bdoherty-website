@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 
-import { showItem, deleteItem } from '../../api/items'
+import { showItem, deleteItem, updateCartItem } from '../../api/items'
 
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -12,10 +12,33 @@ class OneItem extends Component {
 
     this.state = {
       item: null,
+      inCart: false,
       exists: true,
       deleted: false,
       clickUpdateItem: false
     }
+  }
+
+  addToCart = () => {
+    const { item } = this.state
+    // const { user, match } = this.props
+    item.inCart = true
+
+    updateCartItem(item._id, item)
+      .then(this.setState({ inCart: true }))
+
+      .then(console.log(item))
+  }
+
+  removeFromCart = () => {
+    const { item } = this.state
+    // const { user, match } = this.props
+    item.inCart = false
+
+    updateCartItem(item._id, item)
+      .then(this.setState({ inCart: false }))
+
+      .then(console.log(item))
   }
 
   handleChange = event => {
@@ -55,6 +78,9 @@ class OneItem extends Component {
       .then(res => {
         this.setState({ item: res.data.item })
         return res
+      })
+      .then(res => {
+        this.setState({ inCart: res.data.item.inCart })
       })
       // .then(res => msgAlert({
       //   message: `Here is ${res.data.item.name}!`,
@@ -111,6 +137,11 @@ class OneItem extends Component {
                 </div>
               </div>
             </Card.Body>
+            {item.inCart === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.addToCart}>
+            Add To Cart
+            </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.removeFromCart}>
+            Remove From Cart
+            </Button>}
           </Card>
         </div>
       )
@@ -138,6 +169,11 @@ class OneItem extends Component {
                 </div>
               </div>
             </Card.Body>
+            {item.inCart === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.addToCart}>
+            Add To Cart
+            </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.removeFromCart}>
+            Remove From Cart
+            </Button>}
           </Card>
         </div>
       )

@@ -28,7 +28,7 @@ const AddForm = ({ item, handleSubmit, handleChange }) => {
       keyboard={false}
     >
       <Modal.Header className='modal-bg' closeButton>
-        <Modal.Title>What&apos;s New!</Modal.Title>
+        <Modal.Title>What&apos;s New?</Modal.Title>
       </Modal.Header>
       <Modal.Body className='modal-bg'>
         <Form onSubmit={handleSubmit}>

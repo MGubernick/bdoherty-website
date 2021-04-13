@@ -3,12 +3,11 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
-// const authenticatedOptions = (
-//   <Fragment>
-//     {/* <Nav.Link href="#change-password">Change Password</Nav.Link> */}
-//     {/* <Nav.Link href="#sign-out">Sign Out</Nav.Link> */}
-//   </Fragment>
-// )
+const authenticatedOptions = (
+  <Fragment>
+    <Nav.Link href="#cart">Cart</Nav.Link>
+  </Fragment>
+)
 
 // const adminOptions = (
 //   <Fragment>
@@ -53,7 +52,7 @@ const Header = ({ user }) => (
           <NavDropdown.Item className="dropdownitem" href="#sign-out">Sign Out</NavDropdown.Item>
         </NavDropdown>}
         { alwaysOptions }
-        { user ? null : unauthenticatedOptions }
+        { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>
