@@ -42,7 +42,7 @@ export const updateItem = (id, item, user) => {
 }
 
 // Update item in cart
-export const updateCartItem = (id, item) => {
+export const updateCartItem = async (id, item) => {
   return axios({
     url: apiUrl + '/items-incart/' + id,
     method: 'PATCH',

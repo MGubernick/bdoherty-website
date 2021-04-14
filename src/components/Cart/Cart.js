@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-import { indexItems } from './../../api/items.js'
+// import { indexItems } from '../../api/items.js'
+import { indexItems, updateCartItem } from '../../api/items.js'
 
 class Cart extends Component {
   constructor (props) {
@@ -19,6 +20,29 @@ class Cart extends Component {
     const { history } = this.props
 
     history.push(`/items/${id}`)
+  }
+
+  async removeFromCart (event, id, item) {
+    // console.log('this is id', id)
+    // console.log('item here: ', item)
+    const { msgAlert } = this.props
+
+    item.inCart = false
+    try {
+      await updateCartItem(item._id, item)
+      await this.setState({ inCart: false })
+      const res = await indexItems()
+      await this.setState({ items: res.data.item.filter(item => {
+        return (item.inCart === true)
+      }) })
+      this.setState({ loaded: true })
+      this.setState({ numsToAdd: [] })
+    } catch (error) {
+      msgAlert({
+        message: `Couldn't load the cart because: ${error.message}`,
+        variant: 'danger'
+      })
+    }
   }
 
   componentDidMount () {
@@ -43,9 +67,12 @@ class Cart extends Component {
   render () {
     let cartJsx
     let subtotal
+    let finalTotal
+    let processing = 500
+    const showProcessing = '5.00'
     const { items, loaded, numsToAdd } = this.state
 
-    console.log('items:', items)
+    // console.log('items:', items)
 
     const formatDollarsToCents = function (value) {
       value = (value + '').replace(/[^\d.-]/g, '')
@@ -56,21 +83,12 @@ class Cart extends Component {
       return value ? Math.round(parseFloat(value) * 100) : 0
     }
 
-    // const formatCentsToDollars = function (value) {
-    //   value = (value + '').replace(/[^\d.-]/g, '')
-    //   value = parseFloat(value)
-    //   return value ? value / 100 : 0
-    // }
-
-    const paymentSub = items.map(item => {
+    items.map(item => {
       let sub = 0
 
       const newSub = sub += formatDollarsToCents(item.price)
       numsToAdd.push(newSub)
     })
-    console.log(paymentSub)
-
-    console.log('this is numsToAdd: ', numsToAdd)
 
     if (numsToAdd) {
       const sum = numsToAdd.reduce(function (a, b) {
@@ -82,18 +100,19 @@ class Cart extends Component {
       split.splice(2, 0, '.')
 
       subtotal = split.reverse().join('')
-      console.log('subtotal: ', subtotal)
+      // console.log('subtotal: ', subtotal)
+
+      const finalSum = processing += formatDollarsToCents(subtotal)
+
+      const finalSplit = finalSum.toString().split('').reverse()
+      finalSplit.splice(2, 0, '.')
+
+      finalTotal = finalSplit.reverse().join('')
     } else {
       return (
         <p>Loading...</p>
       )
     }
-
-    // const paymentSubPrint =
-
-    const paymentTotal = items.map(item => {
-      return 0
-    })
 
     if (items.length === 0 && loaded === true) {
       // return 'Loading...'
@@ -109,7 +128,7 @@ class Cart extends Component {
           className='index-bg style-card' style={{ borderRadius: '12px', height: '250px', padding: '8px', width: '800px', marginTop: '10px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Card.Title style={{ marginLeft: '5px' }}>{item.name}</Card.Title>
-            <Button className="close" style={{ fontSize: '17px', height: '10', width: '20px', zIndex: '10000' }} type="button" onClick={(event) => this.removeFromCart(item, event)}>
+            <Button className="close" style={{ fontSize: '17px', height: '10', width: '20px', zIndex: '10000' }} type="button" onClick={(event) => this.removeFromCart(event, item._id, item)}>
               X
             </Button>
           </div>
@@ -145,8 +164,12 @@ class Cart extends Component {
             <h2 className='text-muted'>${items.length === 0 ? 0 : subtotal}</h2>
           </div>
           <div style={{ alignItems: 'start', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingLeft: '20px', paddingRight: '20px' }}>
+            <h5 className='text-muted'>Processing Fee:</h5>
+            <h5 className='text-muted'>+ ${items.length === 0 ? 0 : showProcessing}</h5>
+          </div>
+          <div style={{ alignItems: 'start', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingLeft: '20px', paddingRight: '20px' }}>
             <h1>Total:</h1>
-            <h1>${items.length === 0 ? 0 : paymentTotal}</h1>
+            <h1>${items.length === 0 ? 0 : finalTotal}</h1>
           </div>
         </div>
       </div>

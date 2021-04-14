@@ -27,7 +27,7 @@ class OneItem extends Component {
     updateCartItem(item._id, item)
       .then(this.setState({ inCart: true }))
 
-      .then(console.log(item))
+    // .then(console.log(item))
   }
 
   removeFromCart = () => {
@@ -38,7 +38,7 @@ class OneItem extends Component {
     updateCartItem(item._id, item)
       .then(this.setState({ inCart: false }))
 
-      .then(console.log(item))
+    // .then(console.log(item))
   }
 
   handleChange = event => {
