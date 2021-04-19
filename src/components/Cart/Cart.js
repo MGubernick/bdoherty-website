@@ -27,9 +27,6 @@ class Cart extends Component {
   async removeFromCart (event, id, item) {
     const { user, msgAlert, setUser } = this.props
 
-    // PROBLEM: thisItemInCart is creating an array, not one number.
-    // Solution:
-    // identify the item in the cart's id for removal
     const thisItemInCart = user.myCart.filter(cartItem => {
       if (cartItem.itemId === id) {
         return cartItem._id
@@ -38,9 +35,9 @@ class Cart extends Component {
     console.log('this is thisItemInCart:', thisItemInCart)
 
     // ensure the item exists for filter
-    function itemExists (itemId) {
-      return user.myCart.some(function (match) {
-        return match.itemId === itemId
+    function itemExists (idOfItem) {
+      return user.myCart.some((match) => {
+        return match.itemId === idOfItem
       })
     }
 
@@ -54,7 +51,7 @@ class Cart extends Component {
       await this.setState({ inCart: false })
       const res = await indexItems()
       await this.setState({ items: res.data.item.filter(item => {
-        return (itemExists(item._id) === true)
+        return (item.inCart === true && itemExists(item._id) === true)
       }) })
       this.setState({ loaded: true })
       this.setState({ numsToAdd: [] })
@@ -101,7 +98,7 @@ class Cart extends Component {
     const showProcessing = '5.00'
     const { items, loaded, numsToAdd } = this.state
 
-    console.log('items:', items)
+    // console.log('items:', items)
 
     const formatDollarsToCents = function (value) {
       value = (value + '').replace(/[^\d.-]/g, '')

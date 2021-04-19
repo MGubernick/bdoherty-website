@@ -23,8 +23,8 @@ class OneItem extends Component {
   async addToCart (event, item) {
     // const { item } = this.state
     const { user, setUser } = this.props
-    console.log('this is user: ', user)
-    console.log('this is item: ', item)
+    // console.log('this is user: ', user)
+    // console.log('this is item: ', item)
 
     item.inCart = true
     try {
@@ -46,7 +46,7 @@ class OneItem extends Component {
         return cartItem._id
       }
     })
-    console.log('this is thisItemInCart:', thisItemInCart)
+    // console.log('this is thisItemInCart:', thisItemInCart)
 
     item.inCart = false
     try {
@@ -104,10 +104,6 @@ class OneItem extends Component {
       .then(res => {
         this.setState({ inCart: res.data.item.inCart })
       })
-      // .then(res => msgAlert({
-      //   message: `Here is ${res.data.item.name}!`,
-      //   variant: 'success'
-      // }))
       .catch(error => msgAlert({
         message: `Uh Oh..that didn't work because..${error.message}`,
         variant: 'danger'
