@@ -3,9 +3,16 @@ import { withRouter } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
+// checkout imports
+import StripeCheckout from 'react-stripe-checkout'
+import axios from 'axios'
+// import { toast } from 'react-toastify'
+
 // import { indexItems } from '../../api/items.js'
 import { indexItems, updateCartItem } from '../../api/items.js'
 import { removeFromMyCart } from '../../api/myCart.js'
+
+// toast.configure()
 
 class Cart extends Component {
   constructor (props) {
@@ -13,7 +20,8 @@ class Cart extends Component {
 
     this.state = {
       items: [],
-      inCart: null
+      inCart: null,
+      totalCartPrice: null
     }
   }
 
@@ -63,6 +71,20 @@ class Cart extends Component {
     }
   }
 
+  // fix the stripe API call
+  async handleStripeToken (token) {
+    // console.log('this is amont before axios', amount)
+    const res = await axios.post('http://localhost:4741/checkout', { token })
+    const { status } = res.data
+    console.log('this is status: ', status)
+
+    if (status === 'success') {
+      console.log('yay! it works!')
+    } else {
+      console.error('ooops! That did not work!')
+    }
+  }
+
   componentDidMount () {
     const { msgAlert, user } = this.props
     console.log('this is user:', user)
@@ -93,6 +115,7 @@ class Cart extends Component {
   render () {
     let cartJsx
     let subtotal
+    let finalSum
     let finalTotal
     let processing = 500
     const showProcessing = '5.00'
@@ -128,7 +151,7 @@ class Cart extends Component {
       subtotal = split.reverse().join('')
       // console.log('subtotal: ', subtotal)
 
-      const finalSum = processing += formatDollarsToCents(subtotal)
+      finalSum = processing += formatDollarsToCents(subtotal)
 
       const finalSplit = finalSum.toString().split('').reverse()
       finalSplit.splice(2, 0, '.')
@@ -198,6 +221,15 @@ class Cart extends Component {
             <h1>${items.length === 0 ? 0 : finalTotal}</h1>
           </div>
         </div>
+        <StripeCheckout
+          stripeKey='pk_test_51IcvQ1BhI8SMmaQRwum7L4zzxN76xhZYzxk44FjPAHR7r16Nuz8uzt3gjols2O2Kpt2aokUTwZxEwufaNi6p0HY600EYJ2MM15'
+          token={this.handleStripeToken}
+          amount={finalSum}
+          label='Checkout Now'
+          billingAddress
+          shippingAddress
+          name='Checkout!'
+        />
       </div>
     )
   }
