@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 
 // import { indexItems } from '../../api/items.js'
 import { indexItems, updateCartItem } from '../../api/items.js'
+import { removeFromMyCart } from '../../api/myCart.js'
 
 class Cart extends Component {
   constructor (props) {
@@ -22,18 +23,38 @@ class Cart extends Component {
     history.push(`/items/${id}`)
   }
 
+  // With multiple items in cart, remove does not work
   async removeFromCart (event, id, item) {
-    // console.log('this is id', id)
-    // console.log('item here: ', item)
-    const { msgAlert } = this.props
+    const { user, msgAlert, setUser } = this.props
 
+    // PROBLEM: thisItemInCart is creating an array, not one number.
+    // Solution:
+    // identify the item in the cart's id for removal
+    const thisItemInCart = user.myCart.filter(cartItem => {
+      if (cartItem.itemId === id) {
+        return cartItem._id
+      }
+    })
+    console.log('this is thisItemInCart:', thisItemInCart)
+
+    // ensure the item exists for filter
+    function itemExists (itemId) {
+      return user.myCart.some(function (match) {
+        return match.itemId === itemId
+      })
+    }
+
+    // change the status of inCart to false before sending the data to the API
     item.inCart = false
+
     try {
+      const gone = await removeFromMyCart(thisItemInCart[0]._id, user)
+      await setUser(gone.data.user)
       await updateCartItem(item._id, item)
       await this.setState({ inCart: false })
       const res = await indexItems()
       await this.setState({ items: res.data.item.filter(item => {
-        return (item.inCart === true)
+        return (item.inCart === true && itemExists(item._id) === true)
       }) })
       this.setState({ loaded: true })
       this.setState({ numsToAdd: [] })
@@ -46,13 +67,21 @@ class Cart extends Component {
   }
 
   componentDidMount () {
-    const { msgAlert } = this.props
+    const { msgAlert, user } = this.props
+    console.log('this is user:', user)
+    console.log('this is myCart:', user.myCart)
+    function itemExists (itemId) {
+      return user.myCart.some(function (match) {
+        return match.itemId === itemId
+      })
+    }
 
     indexItems()
       .then(res => {
         this.setState({ items: res.data.item.filter(item => {
-          return (item.inCart === true)
-        }) })
+          return item.inCart === true && itemExists(item._id) === true
+        })
+        })
       })
       .then(this.setState({ loaded: true }))
       .then(this.setState({ numsToAdd: [] }))
@@ -72,7 +101,7 @@ class Cart extends Component {
     const showProcessing = '5.00'
     const { items, loaded, numsToAdd } = this.state
 
-    // console.log('items:', items)
+    console.log('items:', items)
 
     const formatDollarsToCents = function (value) {
       value = (value + '').replace(/[^\d.-]/g, '')

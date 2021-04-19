@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 
 import { showItem, deleteItem, updateCartItem } from '../../api/items'
+import { addToMyCart, removeFromMyCart } from '../../api/myCart'
 
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -19,26 +20,47 @@ class OneItem extends Component {
     }
   }
 
-  addToCart = () => {
-    const { item } = this.state
-    // const { user, match } = this.props
+  async addToCart (event, item) {
+    // const { item } = this.state
+    const { user, setUser } = this.props
+    console.log('this is user: ', user)
+    console.log('this is item: ', item)
+
     item.inCart = true
-
-    updateCartItem(item._id, item)
-      .then(this.setState({ inCart: true }))
-
-    // .then(console.log(item))
+    try {
+      await updateCartItem(item._id, item)
+      await this.setState({ inCart: true })
+      // await addToMyCart(item, user)
+      const res = await addToMyCart(item, user)
+      // res.data.user.myCart[0]._id = res.data.user.myCart[0].itemId
+      await setUser(res.data.user)
+    } catch (error) {
+      console.log('this is why it failed: ', error.message)
+    }
   }
 
-  removeFromCart = () => {
-    const { item } = this.state
-    // const { user, match } = this.props
+  async removeFromCart (event, id, item) {
+    const { user, msgAlert, setUser } = this.props
+    const thisItemInCart = user.myCart.map(cartItem => {
+      if (cartItem.itemId === item._id) {
+        return cartItem._id
+      }
+    })
+    console.log('this is thisItemInCart:', thisItemInCart)
+
     item.inCart = false
-
-    updateCartItem(item._id, item)
-      .then(this.setState({ inCart: false }))
-
-    // .then(console.log(item))
+    try {
+      await updateCartItem(item._id, item)
+      await this.setState({ inCart: false })
+      // include remove from the user's myCart as well
+      const gone = await removeFromMyCart(thisItemInCart, user)
+      await setUser(gone.data.user)
+    } catch (error) {
+      msgAlert({
+        message: `Couldn't load the cart because: ${error.message}`,
+        variant: 'danger'
+      })
+    }
   }
 
   handleChange = event => {
@@ -96,6 +118,11 @@ class OneItem extends Component {
     const { item, clickUpdateItem } = this.state
     const { user } = this.props
     let admin
+    function itemExists (itemId) {
+      return user.myCart.some(function (match) {
+        return match.itemId === itemId
+      })
+    }
 
     // console.log('this is item', item)
 
@@ -109,42 +136,73 @@ class OneItem extends Component {
       )
     }
 
-    if (user) {
-      admin = user.email
-    }
-
     let itemDisplay
 
-    if (admin !== 'bdoherty@bdoh.com') {
-      itemDisplay = (
-        <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
-          <Card key={item._id}
-            className="index-bg"
-            style={{ border: '1px solid', borderRadius: '12px', boxShadow: ' -.3px .5px 0px .5px grey', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', adding: '10px', width: '600px' }} >
-            <Card.Body className="card-body" style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', overflow: 'auto' }}>
-              <div>
-                <div style={{ width: '200px' }}>
-                  <Card.Title style={{ fontSize: '40px' }}>{item.name}</Card.Title>
-                  <Card.Img variant="top" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
-                  {item.purchased === true ? <Card.Subtitle className="mb-2">SOLD!</Card.Subtitle> : null}
-                  <Card.Subtitle style={{ fontSize: '15px', margin: '13px 0px 13px 0px' }}>Measurements: {item.measurements}</Card.Subtitle>
-                  <Card.Text style={{ fontSize: '15px' }}><strong>${item.price}</strong></Card.Text>
+    if (user) {
+      admin = user.email
+      if (admin !== 'bdoherty@bdoh.com') {
+        itemDisplay = (
+          <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
+            <Card key={item._id}
+              className="index-bg"
+              style={{ border: '1px solid', borderRadius: '12px', boxShadow: ' -.3px .5px 0px .5px grey', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', adding: '10px', width: '600px' }} >
+              <Card.Body className="card-body" style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', overflow: 'auto' }}>
+                <div>
+                  <div style={{ width: '200px' }}>
+                    <Card.Title style={{ fontSize: '40px' }}>{item.name}</Card.Title>
+                    <Card.Img variant="top" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
+                    {item.purchased === true ? <Card.Subtitle className="mb-2">SOLD!</Card.Subtitle> : null}
+                    <Card.Subtitle style={{ fontSize: '15px', margin: '13px 0px 13px 0px' }}>Measurements: {item.measurements}</Card.Subtitle>
+                    <Card.Text style={{ fontSize: '15px' }}><strong>${item.price}</strong></Card.Text>
+                  </div>
+                  <div style={{ border: '1px solid', borderRadius: '9px', margin: '15px', padding: '20px', width: '475px' }}>
+                    <Card.Text style={{ whiteSpace: 'pre-wrap' }}>
+                      {item.description}
+                    </Card.Text>
+                  </div>
                 </div>
-                <div style={{ border: '1px solid', borderRadius: '9px', margin: '15px', padding: '20px', width: '475px' }}>
-                  <Card.Text style={{ whiteSpace: 'pre-wrap' }}>
-                    {item.description}
-                  </Card.Text>
+              </Card.Body>
+              {item.inCart === false && itemExists(item._id) === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.addToCart(event, item)}>
+              Add To Cart
+              </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.removeFromCart(event, item._id, item)}>
+              Remove From Cart
+              </Button>}
+            </Card>
+          </div>
+        )
+      } else {
+        itemDisplay = (
+          <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
+            <Card key={item._id}
+              className="index-bg"
+              style={{ border: '1px solid', borderRadius: '12px', boxShadow: ' -.3px .5px 0px .5px grey', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', padding: '10px', width: '600px' }} >
+              <Card.Body className="card-body" style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', overflow: 'auto' }}>
+                <div>
+                  <div style={{ width: '200px' }}>
+                    <Card.Title style={{ fontSize: '40px' }}>{item.name}</Card.Title>
+                    <Button onClick={this.updateItemClicked} >Update</Button>
+                    <Button style={{ marginLeft: '10px' }} onClick={this.onDeleteItem} variant="secondary">Delete</Button>
+                    <Card.Img variant="top" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
+                    {item.purchased === true ? <Card.Subtitle className="mb-2">SOLD!</Card.Subtitle> : null}
+                    <Card.Subtitle style={{ fontSize: '15px', margin: '13px 0px 13px 0px' }}>Measurements: {item.measurements}</Card.Subtitle>
+                    <Card.Text style={{ fontSize: '15px' }}><strong>${item.price}</strong></Card.Text>
+                  </div>
+                  <div style={{ border: '1px solid', borderRadius: '9px', margin: '15px', padding: '20px', width: '475px' }}>
+                    <Card.Text style={{ whiteSpace: 'pre-wrap' }}>
+                      {item.description}
+                    </Card.Text>
+                  </div>
                 </div>
-              </div>
-            </Card.Body>
-            {item.inCart === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.addToCart}>
-            Add To Cart
-            </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.removeFromCart}>
-            Remove From Cart
-            </Button>}
-          </Card>
-        </div>
-      )
+              </Card.Body>
+              {item.inCart === false && itemExists(item._id) === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.addToCart(event, item)}>
+              Add To Cart
+              </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.removeFromCart(event, item._id, item)}>
+              Remove From Cart
+              </Button>}
+            </Card>
+          </div>
+        )
+      }
     } else {
       itemDisplay = (
         <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
@@ -155,8 +213,7 @@ class OneItem extends Component {
               <div>
                 <div style={{ width: '200px' }}>
                   <Card.Title style={{ fontSize: '40px' }}>{item.name}</Card.Title>
-                  <Button onClick={this.updateItemClicked} >Update</Button>
-                  <Button style={{ marginLeft: '10px' }} onClick={this.onDeleteItem} variant="secondary">Delete</Button>
+                  <Card.Subtitle style={{ color: '#ca2323', fontSize: '12px' }}><small>(Sign Up/In to add items to your cart!)</small></Card.Subtitle>
                   <Card.Img variant="top" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
                   {item.purchased === true ? <Card.Subtitle className="mb-2">SOLD!</Card.Subtitle> : null}
                   <Card.Subtitle style={{ fontSize: '15px', margin: '13px 0px 13px 0px' }}>Measurements: {item.measurements}</Card.Subtitle>
@@ -169,11 +226,6 @@ class OneItem extends Component {
                 </div>
               </div>
             </Card.Body>
-            {item.inCart === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.addToCart}>
-            Add To Cart
-            </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={this.removeFromCart}>
-            Remove From Cart
-            </Button>}
           </Card>
         </div>
       )

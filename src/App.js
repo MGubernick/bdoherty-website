@@ -76,7 +76,7 @@ class App extends Component {
             <Browser msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/items/:id' render={() => (
-            <ShowOne msgAlert={this.msgAlert} user={user} />
+            <ShowOne msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
           <Route exact path='/search-mugs' render={() => (
             <MugIndex msgAlert={this.msgAlert} user={user} />
@@ -97,7 +97,7 @@ class App extends Component {
             <ElseIndex msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/cart' render={() => (
-            <Cart msgAlert={this.msgAlert} user={user} />
+            <Cart msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
