@@ -54,7 +54,7 @@ class Cart extends Component {
       await this.setState({ inCart: false })
       const res = await indexItems()
       await this.setState({ items: res.data.item.filter(item => {
-        return (item.inCart === true && itemExists(item._id) === true)
+        return (itemExists(item._id) === true)
       }) })
       this.setState({ loaded: true })
       this.setState({ numsToAdd: [] })
@@ -79,7 +79,7 @@ class Cart extends Component {
     indexItems()
       .then(res => {
         this.setState({ items: res.data.item.filter(item => {
-          return item.inCart === true && itemExists(item._id) === true
+          return itemExists(item._id) === true
         })
         })
       })

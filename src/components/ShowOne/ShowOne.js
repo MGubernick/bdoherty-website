@@ -118,9 +118,10 @@ class OneItem extends Component {
     const { item, clickUpdateItem } = this.state
     const { user } = this.props
     let admin
-    function itemExists (itemId) {
-      return user.myCart.some(function (match) {
-        return match.itemId === itemId
+
+    function itemExists (idOfItem) {
+      return user.myCart.some(match => {
+        return match.itemId === idOfItem
       })
     }
 
@@ -162,7 +163,7 @@ class OneItem extends Component {
                   </div>
                 </div>
               </Card.Body>
-              {item.inCart === false && itemExists(item._id) === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.addToCart(event, item)}>
+              {itemExists(item._id) === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.addToCart(event, item)}>
               Add To Cart
               </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.removeFromCart(event, item._id, item)}>
               Remove From Cart
@@ -194,7 +195,7 @@ class OneItem extends Component {
                   </div>
                 </div>
               </Card.Body>
-              {item.inCart === false && itemExists(item._id) === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.addToCart(event, item)}>
+              {itemExists(item._id) === false ? <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.addToCart(event, item)}>
               Add To Cart
               </Button> : <Button className="close" style={{ alignContent: 'center', alignSelf: 'flex-end', border: '1px solid black', background: '#28d3ee', color: '#ee4328', display: 'flex', fontSize: '25px', justifyContent: 'center', margin: '0px 15px 15px 15px', padding: '5px', zIndex: '10000' }} type="button" onClick={(event) => this.removeFromCart(event, item._id, item)}>
               Remove From Cart
