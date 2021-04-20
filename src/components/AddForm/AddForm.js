@@ -100,7 +100,7 @@ const AddForm = ({ item, handleSubmit, handleChange }) => {
             />
           </Form.Group>
 
-          <Button variant="secondary" onClick={handleCloseAddModal}>
+          <Button variant="secondary" style={{ marginRight: '5px' }} onClick={handleCloseAddModal}>
               Close
           </Button>
           <Button

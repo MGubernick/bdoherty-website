@@ -40,7 +40,7 @@ class Cart extends Component {
         return cartItem._id
       }
     })
-    console.log('this is thisItemInCart:', thisItemInCart)
+    // console.log('this is thisItemInCart:', thisItemInCart)
 
     // ensure the item exists for filter
     function itemExists (idOfItem) {
@@ -72,16 +72,34 @@ class Cart extends Component {
   }
 
   // fix the stripe API call
-  async handleStripeToken (token) {
-    // console.log('this is amont before axios', amount)
-    const res = await axios.post('http://localhost:4741/checkout', { token })
-    const { status } = res.data
-    console.log('this is status: ', status)
 
+  async handleStripeToken (token, price) {
+    // console.log('this is token', token)
+    // console.log('this is price', price)
+    const { msgAlert } = this.props
+    const { items } = this.state
+
+    // console.log('this is amont before axios', amount)
+    const response = await axios.post('http://localhost:4741/checkout', {
+      token,
+      price
+    })
+    const { status } = response.data
     if (status === 'success') {
-      console.log('yay! it works!')
+      msgAlert({
+        message: 'Success! Check your email for details!',
+        variant: 'success'
+      })
+      items.forEach(item => {
+        item.purchased = true
+        item.inCart = false
+        this.removeFromCart(event, item._id, item)
+      })
     } else {
-      console.error('ooops! That did not work!')
+      msgAlert({
+        message: 'Oops, that did not work!',
+        variant: 'danger'
+      })
     }
   }
 
@@ -221,15 +239,15 @@ class Cart extends Component {
             <h1>${items.length === 0 ? 0 : finalTotal}</h1>
           </div>
         </div>
-        <StripeCheckout
+        {items.length === 0 ? null : <StripeCheckout
           stripeKey='pk_test_51IcvQ1BhI8SMmaQRwum7L4zzxN76xhZYzxk44FjPAHR7r16Nuz8uzt3gjols2O2Kpt2aokUTwZxEwufaNi6p0HY600EYJ2MM15'
-          token={this.handleStripeToken}
+          token={(event) => this.handleStripeToken(event, finalSum)}
           amount={finalSum}
           label='Checkout Now'
           billingAddress
           shippingAddress
           name='Checkout!'
-        />
+        />}
       </div>
     )
   }
