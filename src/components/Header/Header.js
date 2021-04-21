@@ -25,6 +25,7 @@ const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
     <Nav.Link href="#about-me">About Me</Nav.Link>
+    <Nav.Link href="#shop">Shop</Nav.Link>
     <NavDropdown title='Shop By Category' id="basic-nav-dropdown" className="dropdownitem">
       <NavDropdown.Item className="dropdownitem" href="#search-mugs">Mugs</NavDropdown.Item>
       <NavDropdown.Item className="dropdownitem" href="#search-bowls">Bowls</NavDropdown.Item>

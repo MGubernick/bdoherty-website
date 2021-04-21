@@ -13,6 +13,8 @@ import ChangePassword from './components/ChangePassword/ChangePassword'
 // import item components
 import AddItem from './components/AddItem/AddItem.js'
 import Browser from './components/Browser/Browser.js'
+import HomePage from './components/Home/Home.js'
+import AboutMe from './components/AboutMe/AboutMe.js'
 import ShowOne from './components/ShowOne/ShowOne.js'
 import UpdateItem from './components/UpdateItem/UpdateItem.js'
 import MugIndex from './components/Category/MugIndex/MugIndex.js'
@@ -72,8 +74,14 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <Route exact path='/' render={() => (
+          <Route exact path ='/' render={() => (
+            <HomePage msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/shop' render={() => (
             <Browser msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/about-me' render={() => (
+            <AboutMe msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/items/:id' render={() => (
             <ShowOne msgAlert={this.msgAlert} user={user} setUser={this.setUser} />

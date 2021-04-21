@@ -56,7 +56,7 @@ class SetIndex extends Component {
         <Card.Body>
           <Card.Title>{item.name}</Card.Title>
           <Card.Img variant="top" style={{ height: '170px', margin: '20px', width: '160px' }} src={item.imageURL} />
-          {item.purchased === true ? <Card.Subtitle className="mb-2">SOLD!</Card.Subtitle> : null}
+          {item.purchased === true ? <Card.Title className="mb-2" style={{ color: '#ff0000', fontSize: '15px' }}>SOLD OUT!</Card.Title> : null}
           <Card.Subtitle className="mb-2 text-muted">Measurements: {item.measurements}</Card.Subtitle>
           <Card.Subtitle className="mb-2 text-muted"><strong>${item.price}</strong></Card.Subtitle>
         </Card.Body>
