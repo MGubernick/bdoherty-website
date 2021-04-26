@@ -26,7 +26,7 @@ const alwaysOptions = (
     <Nav.Link href="#/">Home</Nav.Link>
     <Nav.Link href="#about-me">About Me</Nav.Link>
     <Nav.Link href="#shop">Shop</Nav.Link>
-    <NavDropdown title='Shop By Category' id="basic-nav-dropdown" className="dropdownitem">
+    <NavDropdown title='Find By Category' id="basic-nav-dropdown" className="dropdownitem">
       <NavDropdown.Item className="dropdownitem" href="#search-mugs">Mugs</NavDropdown.Item>
       <NavDropdown.Item className="dropdownitem" href="#search-bowls">Bowls</NavDropdown.Item>
       <NavDropdown.Item className="dropdownitem" href="#search-plates">Plates</NavDropdown.Item>
@@ -37,10 +37,26 @@ const alwaysOptions = (
   </Fragment>
 )
 
+const unauthenticatedBrand = (
+  <Fragment>
+    <div className="nav-name-custom">
+    BDoherty Pottery
+    </div>
+  </Fragment>
+)
+
+const authenticatedBrand = (
+  <Fragment>
+    <div className="nav-name-custom">
+    BDoherty Pottery
+    </div>
+  </Fragment>
+)
+
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
-    <Navbar.Brand href="#">
-      BDoherty Pottery
+  <Navbar className="header-link-style" bg="white" variant="dark" expand="md">
+    <Navbar.Brand className="header-style" href="#/">
+      { user ? authenticatedBrand : unauthenticatedBrand}
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

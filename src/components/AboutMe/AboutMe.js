@@ -11,7 +11,7 @@ class AboutMe extends Component {
 
   render () {
     return (
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
         <h3>This is the About Me Page!</h3>
       </div>
     )

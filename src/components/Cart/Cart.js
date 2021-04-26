@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 // checkout imports
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
-// import { toast } from 'react-toastify'
+import apiUrl from '../../apiConfig'
 
 // import { indexItems } from '../../api/items.js'
 import { indexItems, updateCartItem } from '../../api/items.js'
@@ -80,7 +80,7 @@ class Cart extends Component {
     const { items } = this.state
 
     // console.log('this is amont before axios', amount)
-    const response = await axios.post('http://localhost:4741/checkout', {
+    const response = await axios.post(apiUrl + '/checkout', {
       token,
       price
     })

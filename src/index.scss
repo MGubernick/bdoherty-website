@@ -1,3 +1,44 @@
 $primary: #28d3ee;
+$white: #fff;
 
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Satisfy&display=swap');
+$header-bg: #fff;
+$header-text: #000;
+$hover-text: #28d3ee;
+$font-fam-1: 'Dancing Script', cursive;
+$font-fam-2: 'Satisfy', cursive;
+
+.active {
+  color: $hover-text !important;
+}
+
+.dropdownitem {
+  color: $header-text;
+
+  &:hover {
+    color: $hover-text;
+  }
+}
+
+.header-style {
+  color: $header-text;
+  font-family: $font-fam-1;
+  font-size: 40px;
+}
+
+.home-page-topline {
+  font-family: $font-fam-2;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: $header-text;
+
+  &:hover {
+    color: $hover-text;
+  }
+}
+
+.nav-name-custom {
+  color: $header-text;
+}

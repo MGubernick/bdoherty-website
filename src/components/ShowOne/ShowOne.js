@@ -84,7 +84,7 @@ class OneItem extends Component {
       //   message: 'Deleted the item!',
       //   variant: 'success'
       // }))
-      .then(() => history.push('/'))
+      .then(() => history.push('/shop'))
       .catch(error => {
         msgAlert({
           message: `That didn't work...because: ${error.message}`,

@@ -52,7 +52,7 @@ class BowlIndex extends Component {
           this.handleSearchOne(item._id, event)
         }}
         border="primary"
-        className='index-bg style-card' style={{ borderRadius: '5px', margin: '40px', padding: '8px', marginTop: '10px' }}>
+        className='index-bg style-card' style={{ alignItems: 'center', borderRadius: '5px', display: 'flex', height: '350px', margin: '40px', padding: '8px', marginTop: '10px', width: '330px' }}>
         <Card.Body>
           <Card.Title>{item.name}</Card.Title>
           <Card.Img variant="top" style={{ height: '170px', margin: '20px', width: '160px' }} src={item.imageURL} />
