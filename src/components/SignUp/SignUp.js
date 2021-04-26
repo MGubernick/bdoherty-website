@@ -74,7 +74,7 @@ class SignUp extends Component {
             <Modal.Body className='modal-bg'>
               <Form onSubmit={this.onSignUp}>
                 <Form.Group controlId="email">
-                  <Form.Label>Email address <small>(no need to use a reaal email!)</small></Form.Label>
+                  <Form.Label>Email address</Form.Label>
                   <Form.Control
                     required
                     type="email"
