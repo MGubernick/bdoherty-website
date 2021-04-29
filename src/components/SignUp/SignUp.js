@@ -69,7 +69,7 @@ class SignUp extends Component {
             keyboard={false}
           >
             <Modal.Header className='modal-bg' closeButton>
-              <Modal.Title>Sign Up!</Modal.Title>
+              <Modal.Title style={{ fontFamily: 'Satisfy, cursive' }}>Sign Up!</Modal.Title>
             </Modal.Header>
             <Modal.Body className='modal-bg'>
               <Form onSubmit={this.onSignUp}>

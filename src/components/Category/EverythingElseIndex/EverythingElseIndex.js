@@ -66,7 +66,7 @@ class ElseIndex extends Component {
     return (
       <div style={{ alignContent: 'center', display: 'flex', flexDirection: 'column' }}>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h2>Everything Else!</h2>
+          <h2 style={{ fontFamily: 'Satisfy, cursive', fontSize: '60px' }}>Everything Else!</h2>
           <p><small>(click on an image to see full details)</small></p>
         </div>
         <ul>

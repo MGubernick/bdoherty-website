@@ -14,11 +14,19 @@ $font-fam-2: 'Satisfy', cursive;
 }
 
 .dropdownitem {
-  color: $header-text;
+  background: $header-bg;
+  color: $header-text !important;
 
   &:hover {
     color: $hover-text;
   }
+}
+
+.my-footer {
+  align-self: flex-end;
+  display: flex;
+  font-family: $font-fam-1;
+  height: 35px;
 }
 
 .header-style {
@@ -31,7 +39,7 @@ $font-fam-2: 'Satisfy', cursive;
   font-family: $font-fam-2;
 }
 
-.navbar-dark .navbar-nav .nav-link {
+.navbar-light .navbar-nav .nav-link {
   color: $header-text;
 
   &:hover {

@@ -43,7 +43,14 @@ class IndexItems extends Component {
     const { items } = this.state
 
     if (!items) {
-      itemsJsx = 'Loading...'
+      // itemsJsx = 'Loading...'
+      return (
+        itemsJsx = (
+          <div style={{ alignContent: 'center', display: 'flex', flexDirection: 'column' }}>
+            <h3 style={{ alignSelf: 'center', fontFamily: 'Dancing Script, cursive' }}>Loading...Please Hang Tight!</h3>
+            <img style={{ alignSelf: 'center', width: '20%' }} src="https://media.giphy.com/media/3o85xILm2U2hVNhP2g/giphy.gif" alt="loading gif" />
+          </div>
+        ))
     }
 
     itemsJsx = items.map(item => (
@@ -66,7 +73,7 @@ class IndexItems extends Component {
     return (
       <div style={{ alignContent: 'center', display: 'flex', flexDirection: 'column' }}>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h2>Happy Shopping!</h2>
+          <h2 style={{ fontFamily: 'Satisfy, cursive', fontSize: '60px' }}>Happy Shopping!</h2>
           <p><small>(click on an item to see full details)</small></p>
         </div>
         <ul>

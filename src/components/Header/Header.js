@@ -26,7 +26,7 @@ const alwaysOptions = (
     <Nav.Link href="#/">Home</Nav.Link>
     <Nav.Link href="#about-me">About Me</Nav.Link>
     <Nav.Link href="#shop">Shop</Nav.Link>
-    <NavDropdown title='Find By Category' id="basic-nav-dropdown" className="dropdownitem">
+    <NavDropdown title="Find By Category" id="basic-nav-dropdown">
       <NavDropdown.Item className="dropdownitem" href="#search-mugs">Mugs</NavDropdown.Item>
       <NavDropdown.Item className="dropdownitem" href="#search-bowls">Bowls</NavDropdown.Item>
       <NavDropdown.Item className="dropdownitem" href="#search-plates">Plates</NavDropdown.Item>
@@ -54,7 +54,7 @@ const authenticatedBrand = (
 )
 
 const Header = ({ user }) => (
-  <Navbar className="header-link-style" bg="white" variant="dark" expand="md">
+  <Navbar className="header-link-style" variant="light" expand="md">
     <Navbar.Brand className="header-style" href="#/">
       { user ? authenticatedBrand : unauthenticatedBrand}
     </Navbar.Brand>

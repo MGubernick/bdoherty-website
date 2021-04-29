@@ -28,7 +28,7 @@ const UpdateForm = ({ item, handleSubmit, handleChange }) => {
       keyboard={false}
     >
       <Modal.Header className='modal-bg' closeButton>
-        <Modal.Title>Update!</Modal.Title>
+        <Modal.Title style={{ fontFamily: 'Satisfy, cursive' }}>Update!</Modal.Title>
       </Modal.Header>
       <Modal.Body className='modal-bg'>
         <Form onSubmit={handleSubmit}>

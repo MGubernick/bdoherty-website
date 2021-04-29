@@ -72,7 +72,7 @@ class SignIn extends Component {
           >
             <Modal.Header className='modal-bg' closeButton>
               <div style={{ display: 'flex', flexDirection: 'column' }} >
-                <Modal.Title>Sign In!</Modal.Title>
+                <Modal.Title style={{ fontFamily: 'Satisfy, cursive' }}>Sign In!</Modal.Title>
               </div>
             </Modal.Header>
             <Modal.Body className='modal-bg'>

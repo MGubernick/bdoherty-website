@@ -214,7 +214,7 @@ class OneItem extends Component {
               <div>
                 <div style={{ width: '200px' }}>
                   <Card.Title style={{ fontSize: '40px' }}>{item.name}</Card.Title>
-                  <Card.Subtitle style={{ color: '#ca2323', fontSize: '12px' }}><small>(Sign Up/In to add items to your cart!)</small></Card.Subtitle>
+                  <Card.Subtitle style={{ color: '#ca2323', fontSize: '12px', width: '400px' }}>(Sign Up/Sign In to add items to your cart!)</Card.Subtitle>
                   <Card.Img variant="top" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
                   {item.purchased === true ? <Card.Title className="mb-2" style={{ color: '#ff0000', fontSize: '20px' }}>SOLD OUT!</Card.Title> : null}
                   <Card.Subtitle style={{ fontSize: '15px', margin: '13px 0px 13px 0px' }}>Measurements: {item.measurements}</Card.Subtitle>

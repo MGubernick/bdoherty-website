@@ -216,9 +216,9 @@ class Cart extends Component {
     }
 
     return (
-      <div style={{ border: '1px solid black', display: 'flex', flexDirection: 'column', marginBottom: '50px', marginTop: '50px', paddingTop: '5px' }}>
+      <div style={{ border: '1px solid black', display: 'flex', flexDirection: 'column', marginBottom: '200px', marginTop: '50px', paddingTop: '5px' }}>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h2><strong>Order Summery</strong></h2>
+          <h2 style={{ fontFamily: 'Satisfy, cursive', fontSize: '60px' }}><strong>Order Summery</strong></h2>
         </div>
         <ul style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'start', margin: '5px', whiteSpace: 'pre-wrap' }}>
