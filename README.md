@@ -1,4 +1,8 @@
 # Bridget's Website - Front End.
+
+###### If you are interested in signing-in but do not want to create an account - use these credentials:
+email: te@st.com password: 123123
+
 This Repository is for the front end of the BDoherty Pottery Website! Bdoherty Pottery is an e-commerce store that allows the admin to CRUD items (the product being sold) and then allows other users to browse and look at expanded details for various items.  Once a user decides they like something, they can sign-up/sign-in to an account where they can then add items to their cart.  After the item(s) are added to the cart, they can then proceed to checkout and pay for the items via credit card. This site allows the admin to share her work with the world!
 
 ## Set up and instructions:
