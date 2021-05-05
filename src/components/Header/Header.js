@@ -5,7 +5,15 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#cart">Cart</Nav.Link>
+    <Navbar.Brand href="#cart">
+      <img
+        src="https://icongr.am/material/cart-outline.svg?size=141&color=000000"
+        width="30"
+        height="30"
+        className="navbar-nav"
+        alt="Cart Link"
+      />
+    </Navbar.Brand>
   </Fragment>
 )
 
