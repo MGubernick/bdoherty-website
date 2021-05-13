@@ -142,7 +142,7 @@ class OneItem extends Component {
           <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
             <Card key={item._id}
               className="index-bg"
-              style={{ border: '1px solid', borderRadius: '12px', boxShadow: ' -.3px .5px 0px .5px grey', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', adding: '10px', width: '600px' }} >
+              style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', adding: '10px', width: '600px' }} >
               <Card.Body className="card-body" style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', overflow: 'auto' }}>
                 <div>
                   <div style={{ width: '200px' }}>
@@ -174,7 +174,7 @@ class OneItem extends Component {
           <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
             <Card key={item._id}
               className="index-bg"
-              style={{ border: '1px solid', borderRadius: '12px', boxShadow: ' -.3px .5px 0px .5px grey', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', padding: '10px', width: '600px' }} >
+              style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', padding: '10px', width: '600px' }} >
               <Card.Body className="card-body" style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', overflow: 'auto' }}>
                 <div>
                   <div style={{ width: '200px' }}>
@@ -209,7 +209,7 @@ class OneItem extends Component {
         <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
           <Card key={item._id}
             className="index-bg"
-            style={{ border: '1px solid', borderRadius: '12px', boxShadow: ' -.3px .5px 0px .5px grey', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', padding: '10px', width: '600px' }} >
+            style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', padding: '10px', width: '600px' }} >
             <Card.Body className="card-body" style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', overflow: 'auto' }}>
               <div>
                 <div style={{ width: '200px' }}>
