@@ -48,7 +48,8 @@ const alwaysOptions = (
 const unauthenticatedBrand = (
   <Fragment>
     <div className="nav-name-custom">
-    BDoherty Pottery
+      <h1 style={{ marginBottom: '0px' }}>bridget</h1>
+      <h1 style={{ marginTop: '0px' }}>ceramics</h1>
     </div>
   </Fragment>
 )
@@ -56,7 +57,8 @@ const unauthenticatedBrand = (
 const authenticatedBrand = (
   <Fragment>
     <div className="nav-name-custom">
-    BDoherty Pottery
+      <h1 style={{ marginBottom: '0px' }}>bridget</h1>
+      <h1 style={{ marginTop: '0px' }}>ceramics</h1>
     </div>
   </Fragment>
 )
@@ -68,7 +70,7 @@ const Header = ({ user }) => (
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
+      <Nav className="ml-auto nav-style">
         {/* // { user && <span className="navbar-text mr-2">Welcome, {user.username}</span>} */}
         { user && <NavDropdown title={user.username} id="basic-nav-dropdown" className="dropdownitem">
           {user.email === 'bdoherty@bdoh.com' ? <NavDropdown.Item className="dropdownitem" href="#add-one">Add New Item</NavDropdown.Item> : null}

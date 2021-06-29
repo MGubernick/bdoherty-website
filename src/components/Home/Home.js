@@ -15,8 +15,8 @@ class HomePage extends Component {
 
   render () {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '50px' }}>
-        <h3 className="home-page-topline" style={{ fontFamily: 'Satisfy, cursive', fontSize: '60px', marginTop: '200px' }}>Welcome To Bridget Doherty&apos;s Pottery Website!</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '40px' }}>
+        <h3 className="home-page-topline" style={{ alignSelf: 'center', fontSize: '60px', marginTop: '30px' }}>Welcome To bridget ceramics!</h3>
         <h6 className="home-page-topline" style={{ alignSelf: 'center', fontSize: '40px', marginTop: '20px', marginBottom: '200px' }}>Take a look around and enjoy!</h6>
         {/* <img src="" alt="Home Page Image" width="500" height="600"> */}
       </div>

@@ -3,14 +3,44 @@ $white: #fff;
 
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Coming+Soon&family=Josefin+Sans:ital,wght@0,100;1,100&family=Mountains+of+Christmas&family=Shadows+Into+Light&display=swap');
 $header-bg: #fff;
 $header-text: #000;
 $hover-text: #28d3ee;
 $font-fam-1: 'Dancing Script', cursive;
 $font-fam-2: 'Satisfy', cursive;
+$font-fam-3: 'Josefin Sans', 'Helvetica';
+$font-fam-4: 'Shadows Into Light', 'Helvetica';
+$font-fam-5: 'Annie Use Your Telescope', 'Helvetica';
+$font-fam-6: 'Mountains of Christmas', 'Helvetica';
+$font-fam-7: 'Coming Soon', 'Helvetica';
 
 .active {
   color: $hover-text !important;
+}
+
+.card-b-style {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-show-b-style {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-img-style {
+  align-self: center;
+}
+
+.card-title-font {
+  font-family: $font-fam-7;
+  font-size: 30px;
+  margin: auto;
 }
 
 .dropdownitem {
@@ -31,12 +61,13 @@ $font-fam-2: 'Satisfy', cursive;
 
 .header-style {
   color: $header-text;
-  font-family: $font-fam-1;
+  font-family: $font-fam-7;
   font-size: 40px;
+  margin: 30px 0px 0px 30px;
 }
 
 .home-page-topline {
-  font-family: $font-fam-2;
+  font-family: $font-fam-6;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -50,3 +81,25 @@ $font-fam-2: 'Satisfy', cursive;
 .nav-name-custom {
   color: $header-text;
 }
+
+.nav-style {
+  margin-top: 80px;
+}
+
+// @media only screen and (max-width: 800px) {
+//   .happy-shopping-header {
+//     align-content: center;
+//     display: flex;
+//     font-size: 40px;
+//   }
+//
+//   .style-card {
+//     align-items: center;
+//     display: flex;
+//     justify-content: center;
+//   }
+//
+//   .recipe-display-header {
+//     text-align: center;
+//   }
+// }
