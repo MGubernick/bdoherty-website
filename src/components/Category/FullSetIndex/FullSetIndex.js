@@ -39,12 +39,16 @@ class SetIndex extends Component {
     // console.log('this is workouts before map: ', this.state.workouts)
     const { items } = this.state
 
-    if (!items) {
-      return 'Loading Full-Sets...'
-      // itemsJsx = <img style={{ width: '80%' }} src="https://media.giphy.com/media/11T6LuIxeHtJJu/giphy.gif" alt="loading gif" />
-    }
-
     const setItems = items.filter(item => item.category === 'Full-Set')
+
+    if (setItems.length === 0) {
+      return (
+        <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h6 className="home-page-topline">There are currently no sets available! More will be posted soon!</h6>
+          <img style={{ width: '20%' }} src="https://media.giphy.com/media/3o85xILm2U2hVNhP2g/giphy.gif" alt="loading gif" />
+        </div>
+      )
+    }
 
     const itemsJsx = setItems.map(item => (
       <Card key={item._id}
@@ -66,7 +70,7 @@ class SetIndex extends Component {
     return (
       <div style={{ alignContent: 'center', display: 'flex', flexDirection: 'column' }}>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h2 style={{ fontFamily: 'Satisfy, cursive', fontSize: '60px' }}>Full-Sets!</h2>
+          <h2 className="home-page-topline" style={{ fontSize: '60px' }}>Full-Sets!</h2>
           <p><small>(click on an image to see full details)</small></p>
         </div>
         <ul>
