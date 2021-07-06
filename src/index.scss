@@ -19,6 +19,15 @@ $font-fam-7: 'Coming Soon', 'Helvetica';
   color: $hover-text !important;
 }
 
+// .container {
+//   margin: 0 80px;
+// }
+
+.c-image {
+  border-radius: 9px;
+  // height: 800px;
+}
+
 .card-b-style {
   align-self: center;
   display: flex;
@@ -67,7 +76,7 @@ $font-fam-7: 'Coming Soon', 'Helvetica';
 }
 
 .home-page-topline {
-  font-family: $font-fam-6;
+  font-family: $font-fam-7;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -80,6 +89,7 @@ $font-fam-7: 'Coming Soon', 'Helvetica';
 
 .nav-name-custom {
   color: $header-text;
+  // margin-left: 40px;
 }
 
 .nav-style {

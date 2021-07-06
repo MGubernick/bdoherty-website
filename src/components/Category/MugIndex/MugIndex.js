@@ -53,9 +53,9 @@ class MugIndex extends Component {
         }}
         border="primary"
         className='index-bg style-card' style={{ alignItems: 'center', borderRadius: '5px', boxShadow: '-1px 3px #919191', display: 'flex', height: '350px', margin: '40px', padding: '8px', marginTop: '10px', width: '330px' }}>
-        <Card.Body>
-          <Card.Title>{item.name}</Card.Title>
-          <Card.Img variant="top" style={{ height: '170px', margin: '20px', width: '160px' }} src={item.imageURL} />
+        <Card.Body className="card-b-style">
+          <Card.Title className="card-title-font">{item.name}</Card.Title>
+          <Card.Img className="card-img-style" variant="top" style={{ height: '170px', margin: '10px 10px 20px 10px', width: '160px' }} src={item.imageURL} />
           {item.purchased === true ? <Card.Title className="mb-2" style={{ color: '#ff0000', fontSize: '15px' }}>SOLD OUT!</Card.Title> : null}
           <Card.Subtitle className="mb-2 text-muted">Measurements: {item.measurements}</Card.Subtitle>
           <Card.Subtitle className="mb-2 text-muted"><strong>${item.price}</strong></Card.Subtitle>
