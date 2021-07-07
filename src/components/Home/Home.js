@@ -68,7 +68,7 @@ class HomePage extends Component {
           <Carousel.Item>
             <img
               className="d-block w-100 c-image"
-              src="https://imgur.com/RZ1AWpH.png"
+              src="https://imgur.com/NQwPeak.png"
               alt="slide five"
             />
 
