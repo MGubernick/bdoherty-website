@@ -68,7 +68,7 @@ class App extends Component {
             deleteAlert={this.deleteAlert}
           />
         ))}
-        <main className="container">
+        <main style={{ display: 'flex', justifyContent: 'center' }} className="container">
           <Route path='/sign-up' render={() => (
             <SignUp msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />

@@ -19,9 +19,18 @@ $font-fam-7: 'Coming Soon', 'Helvetica';
   color: $hover-text !important;
 }
 
-// .container {
-//   margin: 0 80px;
-// }
+.about-me-temp {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 200px 10px;
+}
+
+.browser-top-line {
+  font-family: $font-fam-7;
+  font-size: 60px;
+}
 
 .c-image {
   border-radius: 9px;
@@ -49,7 +58,7 @@ $font-fam-7: 'Coming Soon', 'Helvetica';
 .card-title-font {
   font-family: $font-fam-7;
   font-size: 30px;
-  margin: auto;
+  width: auto;
 }
 
 .dropdownitem {
@@ -61,22 +70,22 @@ $font-fam-7: 'Coming Soon', 'Helvetica';
   }
 }
 
+.header-style {
+  color: $header-text;
+  font-family: $font-fam-7;
+  font-size: 40px;
+  margin: 30px 0 0 30px;
+}
+
+.home-page-topline {
+  font-family: $font-fam-7;
+}
+
 .my-footer {
   align-self: flex-end;
   display: flex;
   font-family: $font-fam-1;
   height: 35px;
-}
-
-.header-style {
-  color: $header-text;
-  font-family: $font-fam-7;
-  font-size: 40px;
-  margin: 30px 0px 0px 30px;
-}
-
-.home-page-topline {
-  font-family: $font-fam-7;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -96,20 +105,34 @@ $font-fam-7: 'Coming Soon', 'Helvetica';
   margin-top: 80px;
 }
 
-// @media only screen and (max-width: 800px) {
-//   .happy-shopping-header {
-//     align-content: center;
-//     display: flex;
-//     font-size: 40px;
-//   }
-//
-//   .style-card {
-//     align-items: center;
-//     display: flex;
-//     justify-content: center;
-//   }
-//
-//   .recipe-display-header {
-//     text-align: center;
-//   }
-// }
+.show-one-itm {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.show-card-title-font {
+  font-family: $font-fam-7;
+  font-size: 40px;
+  width: 350px;
+}
+
+@media only screen and (max-width: 600px) {
+  .about-image {
+    height: 400px;
+  }
+
+  .about-me-temp {
+    padding: 100px 10px;
+  }
+
+  .browser-top-line {
+    font-size: 40px;
+  }
+
+  .happy-shopping-header {
+    font-size: 15px;
+  }
+
+}

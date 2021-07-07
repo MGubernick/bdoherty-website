@@ -139,13 +139,13 @@ class OneItem extends Component {
       admin = user.email
       if (admin !== 'bdoherty@bdoh.com') {
         itemDisplay = (
-          <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
+          <div className="show-one-itm" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
             <Card key={item._id}
               className="index-bg"
-              style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', adding: '10px', width: '600px' }} >
+              style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', width: '600px' }} >
               <Card.Body className="card-show-b-style">
                 <div style={{ width: '200px' }}>
-                  <Card.Title className="card-title-font" style={{ fontSize: '40px', marginBottom: '15px', width: '200px' }}>{item.name}</Card.Title>
+                  <Card.Title className="show-card-title-font" style={{ margin: '0px 0px 15px 30px' }}>{item.name}</Card.Title>
                   <Card.Img variant="top" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
                   {item.purchased === true ? <Card.Title className="mb-2" style={{ color: '#ff0000', fontSize: '20px' }}>SOLD OUT!</Card.Title> : null}
                   <Card.Subtitle style={{ fontSize: '15px', margin: '13px 0px 13px 20px', width: '250px' }}>Measurements: {item.measurements}</Card.Subtitle>
@@ -169,17 +169,17 @@ class OneItem extends Component {
         )
       } else {
         itemDisplay = (
-          <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
+          <div className="show-one-itm" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
             <Card key={item._id}
               className="index-bg"
               style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', padding: '10px', width: '600px' }} >
               <Card.Body className="card-show-b-style">
                 <div style={{ width: '200px' }}>
-                  <Card.Title className="card-title-font" style={{ fontSize: '40px', marginBottom: '15px', width: '200px' }}>{item.name}</Card.Title>
-                  <Button onClick={this.updateItemClicked} >Update</Button>
+                  <Card.Title className="show-card-title-font" style={{ margin: '0px 0px 15px 20px' }}>{item.name}</Card.Title>
+                  <Button style={{ marginLeft: '20px' }} onClick={this.updateItemClicked} >Update</Button>
                   <Button style={{ marginLeft: '10px' }} onClick={this.onDeleteItem} variant="secondary">Delete</Button>
-                  <Card.Img variant="top" style={{ alignContent: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
-                  {item.purchased === true ? <Card.Title className="mb-2" style={{ color: '#ff0000', fontSize: '20px' }}>SOLD OUT!</Card.Title> : null}
+                  <Card.Img variant="top" style={{ height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
+                  {item.purchased === true ? <Card.Title className="mb-2" style={{ color: '#ff0000', fontSize: '20px', marginLeft: '20px' }}>SOLD OUT!</Card.Title> : null}
                   <Card.Subtitle style={{ fontSize: '15px', margin: '13px 0px 13px 20px', width: '250px' }}>Measurements: {item.measurements}</Card.Subtitle>
                   <Card.Text style={{ fontSize: '15px', marginLeft: '18px' }}><strong>${item.price}</strong></Card.Text>
                 </div>
@@ -202,13 +202,13 @@ class OneItem extends Component {
       }
     } else {
       itemDisplay = (
-        <div style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
+        <div>
           <Card key={item._id}
-            className="index-bg"
-            style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', display: 'flex', marginLeft: '5px', marginRight: '5px', marginBottom: '20px', marginTop: '20px', padding: '10px', width: '600px' }} >
+            className="index-bg show-one-itm"
+            style={{ border: '1px solid', borderRadius: '12px', boxShadow: '-1px 1px 1px 1px #28d3ee', margin: '20px 5px 20px 5px', padding: '10px' }} >
             <Card.Body className="card-show-b-style">
               <div style={{ width: '200px' }}>
-                <Card.Title className="card-title-font" style={{ fontSize: '40px', margin: '0px 0px 15px 30px', width: '600px' }}>{item.name}</Card.Title>
+                <Card.Title className="show-card-title-font" style={{ margin: '0px 0px 15px 30px' }}>{item.name}</Card.Title>
                 <Card.Subtitle style={{ color: '#ca2323', fontSize: '12px', marginLeft: '30px', width: '400px' }}>(Sign Up/Sign In to add items to your cart!)</Card.Subtitle>
                 <Card.Img variant="top" className="card-img-style" style={{ alignSelf: 'center', display: 'flex', justifyContent: 'center', height: '400px', margin: '20px', width: '370px' }} src={item.imageURL} />
                 {item.purchased === true ? <Card.Title className="mb-2" style={{ color: '#ff0000', fontSize: '20px', marginLeft: '20px' }}>SOLD OUT!</Card.Title> : null}
