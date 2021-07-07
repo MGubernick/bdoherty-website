@@ -20,7 +20,7 @@ class AboutMe extends Component {
         <Row>
           <Col className="justify-content-center" sm={12} md={12} lg={6}>
             <div style={{ alignSelf: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <img className="about-image" src="https://imgur.com/az3xd6c.png" alt="image of bridget doherty (the potter)" />
+              <img className="about-image" style={{ borderRadius: '12px' }} src="https://imgur.com/az3xd6c.png" alt="image of bridget doherty (the potter)" />
             </div>
           </Col>
           <Col className="justify-content-center" sm={12} md={12} lg={6}>
